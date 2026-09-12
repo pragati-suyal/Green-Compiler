@@ -1,0 +1,18 @@
+# Compiled files
+.exe
+.o
+.obj
+
+# Python
+__pycache__/
+.pyc
+
+# Temporary analysis files
+analysis_result.txt
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
