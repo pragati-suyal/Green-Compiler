@@ -131,10 +131,6 @@ Users can upload a .cpp file and receive:
 3. Code metrics
 4. Recommendations
 5. Line-by-line energy analysis
-   
-## 📸 Screenshots
-
-![Green Compiler Dashboard](Screenshot/Screenshot 2026-09-12 133138.png)
 
 
 🔮 Future Enhancements
