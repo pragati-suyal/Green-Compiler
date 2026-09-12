@@ -134,7 +134,7 @@ Users can upload a .cpp file and receive:
    
 ## 📸 Screenshots
 
-![Green Compiler Dashboard](screenshots/Screenshot%202026-09-12%20133138.png)
+![Green Compiler Dashboard](Screenshot/Screenshot 2026-09-12 133138.png)
 
 
 🔮 Future Enhancements
