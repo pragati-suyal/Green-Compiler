@@ -1,151 +1,172 @@
- 🌱 Green Compiler — The Silent Energy Crisis
+# 🌱 Green Compiler
+### The Silent Energy Crisis — Analyze Code, Think Green
 
-A static C++ code analysis tool that detects energy-intensive programming patterns and provides optimization recommendations.
+Green Compiler is a static code analysis project that estimates the potential energy cost of C++ programs using heuristic rules. It helps developers identify potentially expensive coding patterns and explore ways to write more efficient code.
 
- 🚀 Project Overview
+**Note:** Green Compiler generates a heuristic score. It does not directly measure electricity consumption, power usage, or energy in joules.
 
-Green Compiler analyzes C++ source code without executing it.
+## 🚀 Features
 
-It identifies patterns that may increase computational energy usage, calculates software metrics, estimates an energy consumption score, and provides optimization suggestions.
+- **Energy Consumption Score:** Estimates code cost using predefined heuristic rules.
+- **Loop Detection:** Identifies loops and potentially expensive nested-loop patterns.
+- **Input/Output Analysis:** Detects common I/O operations such as `cin`, `cout`, `printf`, and `scanf`.
+- **Condition Analysis:** Identifies conditional constructs.
+- **Recursion Detection:** Uses heuristic checks to identify possible recursion.
+- **Code Metrics:** Displays metrics such as cyclomatic complexity and Halstead volume.
+- **Line Energy Analysis:** Shows estimated energy-cost contributions by source-code line.
+- **Before vs. After Comparison:** Compares heuristic scores for original and optimized C++ programs.
+- **Optimization Recommendations:** Highlights code patterns that may benefit from optimization.
+- **Visual Analysis:** Presents analysis results through a web interface.
 
-✨ Features
+## 🛠️ Tech Stack
 
-- 🔍 Static analysis of C++ source code
-- 🔄 Loop detection
-- 🔁 Nested loop detection
-- 📥📤 Input/Output operation detection
-- 🧠 Recursion detection
-- 📊 Cyclomatic Complexity
-- 📐 Halstead Volume
-- ⚡ Energy Consumption Score
-- 🟢🟡🔴 Energy classification: LOW / MEDIUM / HIGH
-- 💡 Optimization recommendations
-- 🌡️ Line-by-line energy heatmap
-- 🌐 Flask-based web interface
+- **C++** — Static code analysis and heuristic scoring
+- **Python (Flask)** — Backend and web application
+- **HTML, CSS, JavaScript** — User interface
+- **Git and GitHub** — Version control and project hosting
 
- 🛠️ Tech Stack
+## ⚙️ How It Works
 
-- C++
-- Python
-- Flask
-- HTML
-- CSS
-- JavaScript
-- Regular Expressions
-- MSYS2 / MinGW
+1. The user uploads a C++ source file.
+2. The backend processes the file using the C++ analysis engine.
+3. The analyzer identifies selected code patterns and calculates a heuristic score.
+4. The application displays the score, code metrics, line-level analysis, and recommendations.
+5. Users can compare the scores of original and optimized versions of their code.
 
-🏗️ Project Structure
+## 📊 Energy Scoring Model
 
+The current heuristic model uses the following formula:
 
+`Score = 10L + 25N + 50I + 5C + 30R + 5`
+
+Where:
+
+- `L` = Number of detected loops
+- `N` = Estimated nested-loop count
+- `I` = Detected input/output operations
+- `C` = Detected conditional constructs
+- `R` = Recursion indicator (1 if detected, otherwise 0)
+- `5` = Base score
+
+The score represents the project's rule-based estimate, not actual energy consumption. Results depend on the analyzer's detection rules and may not reflect runtime execution frequency or hardware behavior.
+
+## 📈 Example: Before vs. After Optimization
+
+An example comparison from the application:
+
+| Metric | Before | After |
+|---|---:|---:|
+| Heuristic score | 100 | 65 |
+| Score reduction | — | 35% |
+
+The percentage reduction is calculated as:
+
+`Reduction (%) = ((Before Score - After Score) / Before Score) × 100`
+
+This example represents a reduction in the estimated heuristic score only. It does not establish a 35% reduction in real electricity consumption. The comparison is meaningful when both programs preserve the required behavior and are analyzed using the same scoring model.
+
+## 💻 Getting Started
+
+### Prerequisites
+
+Install the following:
+
+- Python 3
+- A C++ compiler, such as GCC or MinGW on Windows
+- Git
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/pragati-suyal/Green-Compiler.git
+cd Green-Compiler
+```
+
+### 2. Create and Activate a Virtual Environment
+
+On Windows:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### 3. Install Python Dependencies
+
+If the project contains a `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
+
+Otherwise, install the dependencies listed in the project's backend code.
+
+### 4. Compile the C++ Analyzer
+
+Use the actual source path from your repository. For example, if the analyzer source is `analyzer/energy_analyzer.cpp`:
+
+```bash
+g++ analyzer/energy_analyzer.cpp -o green_compiler.exe
+```
+
+If your project uses multiple C++ source files, include all required source files in the compilation command.
+
+### 5. Run the Flask Application
+
+Run the following command from your project root:
+
+```bash
+python backend/app.py
+```
+
+Once the Flask server starts, open the application in your browser:
+
+**Local URL:** http://127.0.0.1:5000
+
+You can also access it at:
+
+http://localhost:5000
+
+Make sure the C++ analyzer executable and required dependencies are available before running the application.
+
+## 📁 Project Structure
+
+The following is an illustrative structure; adjust it to match the files actually present in your repository.
+
+```text
 Green-Compiler/
-│
 ├── analyzer/
-│   ├── energy_analyzer.cpp
-│   ├── main.cpp
-│   ├── green_compiler.exe
-│   ├── low_test.cpp
-│   ├── medium_test.cpp
-│   └── recursion_test.cpp
-│
-└── backend/
+│   └── energy_analyzer.cpp
+├── backend/
+│   ├── app.py
+│   └── templates/
+│       └── index.html
+├── .gitignore
+└── README.md
+```
 
-⚙️ How It Works
+## 🎯 Project Objective
 
-C++ Source Code
-       ↓
-Static Code Analysis
-       ↓
-Pattern Detection
-       ↓
-Software Metrics
-       ↓
-Energy Score Calculation
-       ↓
-Energy Level
-       ↓
-Optimization Recommendations
-       ↓
-Visual Heatmap
+The goal of Green Compiler is to encourage energy-conscious programming by highlighting potentially expensive code patterns and making code optimization easier to explore.
 
-⚡ Energy Analysis
+The project demonstrates how static analysis, heuristic scoring, C++, and a Flask-based interface can be combined into an educational software-analysis tool.
 
-The project uses a static heuristic scoring model.
+## 🔮 Future Improvements
 
-Different code patterns are assigned estimated energy-cost weights:
+- More robust C++ parsing using an Abstract Syntax Tree (AST)
+- Improved detection of nested loops and recursion
+- More accurate estimates based on execution paths and operation frequency
+- Runtime benchmarking and hardware-based energy measurement
+- Additional optimization suggestions with behavior-preserving examples
+- Automated testing of original and optimized program outputs
 
-1. Loops
-2. Nested loops
-3. Input/Output operations
-4. Conditions
-5. Recursion
+## 👩‍💻 Author
 
-The final score is used to classify code as:
+**Pragati Suyal**
 
-Score	  Energy Level
-< 50	    LOW
-50–119	  MEDIUM
-≥ 120	     HIGH
+- GitHub: [pragati-suyal](https://github.com/pragati-suyal)
+- LinkedIn: [Pragati Suyal](https://www.linkedin.com/in/pragati-suyal-8510ab296)
 
-Note: The energy score is a static heuristic estimate. It does not represent measured electricity consumption, joules, or actual hardware power usage.
+## 📄 Disclaimer
 
-📊 Software Metrics
-
-Cyclomatic Complexity
-
-Measures the logical complexity of the program based on control-flow constructs such as:
-
-1. if
-2. for
-3. while
-4. case
-5. logical operators
-
-Halstead Volume
-
-Estimates program size and complexity using operators and operands..
-
-🧪 Testing
-
-The project was tested using:
-
-(i) LOW energy test
-(ii) MEDIUM energy test
-(iii) HIGH energy test
-(iv) Recursive function test
-
-Example results:
-
-Test	           Energy Score      	Level
-Low Test	           5	             LOW
-Medium Test        	70	             MEDIUM
-Complex Test	      240            	  HIGH
-
-🌐 Web Interface
-
-The Flask backend connects the C++ analyzer with the web interface.
-
-Users can upload a .cpp file and receive:
-
-1. Energy score
-2. Energy level
-3. Code metrics
-4. Recommendations
-5. Line-by-line energy analysis
-
-
-🔮 Future Enhancements
-(i) More accurate energy estimation
-(ii) AST-based C++ analysis
-(iii) Machine-learning-based energy prediction
-(iv) Support for additional programming languages
-(v) Cloud deployment
-(vi) Interactive charts and analytics
-(vii) Real hardware energy measurement integration
-
-👩‍💻 Author
-
-Pragati Suyal
-B.Tech Computer Science & Engineering
-    ├── app.py
-    └── templates/
-        └── index.html
+Green Compiler is an educational and experimental software-analysis project. Its heuristic scores are intended to support code analysis and optimization discussions. They should not be interpreted as verified measurements of real-world energy consumption.
