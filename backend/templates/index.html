@@ -1,6 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,12 +48,12 @@
 
         .header h1 {
             font-size: 40px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .header p {
-            color: #d8f3dc;
             font-size: 16px;
+            line-height: 1.6;
         }
 
         .container {
@@ -62,30 +62,51 @@
             padding: 0 20px;
         }
 
-        .upload-box {
+        .card {
             background: white;
+            border-radius: 16px;
             padding: 25px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
             margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            color: #1b4332;
+        }
+
+        .card p {
+            line-height: 1.7;
+        }
+
+        .upload-area {
+            border: 2px dashed #74c69d;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #f8fff9;
         }
 
         input[type="file"] {
-            margin: 15px;
-            padding: 10px;
-            border: 1px solid #d8e5dc;
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #d8e2dc;
             border-radius: 8px;
+            background: white;
         }
 
         button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
             background: #2d6a4f;
             color: white;
-            border: none;
-            padding: 13px 30px;
-            border-radius: 9px;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: bold;
             cursor: pointer;
+            transition: background 0.2s ease;
         }
 
         button:hover {
@@ -93,310 +114,152 @@
         }
 
         button:disabled {
-            background: #999;
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
-        #loading {
+        .status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
             display: none;
-            text-align: center;
-            margin: 20px;
-            font-size: 16px;
+            line-height: 1.5;
         }
 
-        #error {
-            display: none;
-            background: #ffe5e5;
-            color: #b00020;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #dashboard {
-            display: none;
-        }
-
-        .energy-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-        }
-
-        .energy-card h2 {
-            color: #52796f;
-            margin-bottom: 10px;
-        }
-
-        .score {
-            font-size: 58px;
-            font-weight: bold;
-            margin: 12px;
-        }
-
-        .energy-level {
-            display: inline-block;
-            padding: 9px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-        }
-
-        .LOW {
+        .status.success {
+            display: block;
             background: #d8f3dc;
-            color: #1b5e20;
+            color: #1b4332;
         }
 
-        .MEDIUM {
-            background: #fff3cd;
-            color: #856404;
+        .status.error {
+            display: block;
+            background: #ffe5e5;
+            color: #9b2226;
         }
 
-        .HIGH {
-            background: #ffd6d6;
-            color: #b00020;
+        .results {
+            display: none;
         }
 
         .metrics {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 18px;
-            margin-bottom: 25px;
+            margin-top: 20px;
         }
 
-        .card {
-            background: white;
-            padding: 22px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        .metric {
+            background: #f1f8f3;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #d8e2dc;
         }
 
-        .card h3 {
+        .metric h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
             color: #52796f;
-            font-size: 15px;
+        }
+
+        .metric .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1b4332;
+            overflow-wrap: anywhere;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            background: #102a22;
+            color: #e9f5ec;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .heatmap-row {
+            display: grid;
+            grid-template-columns: 75px 1fr 90px;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .heatmap-bar {
+            height: 14px;
+            border-radius: 20px;
+            background: #d8f3dc;
+            overflow: hidden;
+        }
+
+        .heatmap-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: #40916c;
+        }
+
+        .muted {
+            color: #52796f;
+            font-size: 14px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .comparison-panel {
+            border: 1px solid #d8e2dc;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fbfffc;
+            min-width: 0;
+        }
+
+        .comparison-panel h3 {
             margin-bottom: 12px;
         }
 
-        .value {
+        .comparison-score {
             font-size: 30px;
             font-weight: bold;
-            color: #2d6a4f;
+            margin: 10px 0;
         }
 
-        .software {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 25px;
+        .comparison-note {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff3cd;
+            color: #664d03;
+            line-height: 1.6;
         }
 
-        .energy-breakdown {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-            margin-bottom: 25px;
-        }
-
-        .energy-breakdown h2 {
-            margin-bottom: 20px;
-        }
-
-        .breakdown-row {
-            margin-bottom: 18px;
-        }
-
-        .breakdown-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-
-        .breakdown-bar {
-            width: 100%;
-            height: 12px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .breakdown-fill {
-            height: 100%;
-            background: #2d6a4f;
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-
-        .recommendations {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-            margin-bottom: 25px;
-        }
-
-        .recommendations h2 {
-            margin-bottom: 18px;
-        }
-
-        .recommendation {
-            background: #f1f8f4;
-            border-left: 5px solid #2d6a4f;
-            padding: 13px;
-            border-radius: 7px;
-            margin-bottom: 10px;
-        }
-
-        .code-section {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-            margin-bottom: 25px;
-        }
-
-        .code-section h2 {
-            margin-bottom: 8px;
-        }
-
-        .code-description {
-            color: #52796f;
-            margin-bottom: 20px;
-        }
-
-        .code-container {
-            width: 100%;
-            overflow-x: auto;
-            border-radius: 10px;
-            border: 1px solid #d8e5dc;
-        }
-
-        .code-line {
-            display: flex;
-            min-width: 1100px;
-            font-family: Consolas, "Courier New", monospace;
-            font-size: 14px;
-            line-height: 1.7;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-
-        .line-number {
-            width: 55px;
-            flex-shrink: 0;
-            text-align: right;
-            padding: 5px 10px;
-            color: #6c757d;
-            background: #f5f7f6;
-            user-select: none;
-        }
-
-        .line-code {
-            width: 650px;
-            flex-shrink: 0;
-            padding: 5px 12px;
-            white-space: pre;
-            overflow: hidden;
-        }
-
-        .line-energy {
-            width: 90px;
-            flex-shrink: 0;
-            text-align: center;
-            padding: 5px 8px;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-        }
-
-        .line-reason {
-            width: 220px;
-            flex-shrink: 0;
-            padding: 5px 10px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: #495057;
-        }
-
-        .energy-low {
-            background: #d8f3dc;
-        }
-
-        .energy-medium {
-            background: #ffe8a1;
-        }
-
-        .energy-high {
-            background: #ffb3b3;
-        }
-
-        .energy-none {
-            background: #f8f9fa;
-        }
-
-        .legend {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+        .comparison-result {
+            display: none;
             margin-top: 20px;
-            flex-wrap: wrap;
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 14px;
-        }
-
-        .dot {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-        }
-
-        .dot-low {
-            background: #8fd19e;
-        }
-
-        .dot-medium {
-            background: #f1c40f;
-        }
-
-        .dot-high {
-            background: #e57373;
-        }
-
-        .footer {
-            text-align: center;
-            color: #52796f;
-            padding: 25px;
-        }
-
-        @media (max-width: 800px) {
-            .metrics {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .software {
-                grid-template-columns: 1fr;
-            }
-
+        @media (max-width: 700px) {
             .header h1 {
-                font-size: 32px;
+                font-size: 30px;
             }
-        }
 
-        @media (max-width: 500px) {
-            .metrics {
+            .comparison-grid {
                 grid-template-columns: 1fr;
             }
 
-            .score {
-                font-size: 45px;
+            .heatmap-row {
+                grid-template-columns: 60px 1fr 70px;
+                gap: 8px;
+            }
+
+            .card {
+                padding: 18px;
             }
         }
     </style>
@@ -404,817 +267,391 @@
 
 <body>
 
-<div class="header">
-    <h1>🌱 Green Compiler</h1>
-    <p>Static Energy Analysis of C++ Code</p>
-</div>
-
-<div class="container">
-
-    <div class="upload-box">
-        <h2>⚡ Analyze Your C++ Code</h2>
-        <p style="color:#52796f; margin:8px 0 12px;">
-            Upload a source file to estimate energy-intensive code patterns.
-        </p>
-        <input
-            type="file"
-            id="fileInput"
-            accept=".cpp,.cc,.cxx"
-        >
-        <br>
-        <button
-            id="analyzeBtn"
-            onclick="analyzeCode()"
-        >
-            Analyze Code
-        </button>
-    </div>
-
-    <div id="loading">
-        ⏳ Analyzing your C++ code...
-    </div>
-
-    <div id="error"></div>
-
-    <div id="dashboard">
-
-        <div class="energy-card">
-            <h2>⚡ Energy Consumption Score</h2>
-
-            <div
-                class="score"
-                id="energyScore"
-            >
-                --
+    <header class="header">
+        <div class="brand">
+            <div class="logo">🌱</div>
+            <div>
+                <h1>Green Compiler</h1>
+                <p>The Silent Energy Crisis — Analyze Code, Think Green</p>
             </div>
+        </div>
+    </header>
 
-            <div
-                id="energyLevel"
-                class="energy-level"
-            >
-                --
-            </div>
-            <p style="margin-top:14px; color:#52796f; font-size:12px;">
-                Static heuristic score — not measured electricity or joules.
+    <main class="container">
+
+        <!-- Project Introduction -->
+        <section class="card">
+            <h2>About Green Compiler</h2>
+            <p>
+                Green Compiler is a static code analysis project that estimates
+                code energy scores using heuristic rules. It helps developers
+                identify potentially expensive code patterns such as nested
+                loops and frequent input/output operations.
             </p>
-        </div>
+            <p class="muted" style="margin-top: 10px;">
+                Note: The score is a heuristic estimate, not a direct
+                measurement of electricity consumption.
+            </p>
+        </section>
 
-        <div class="metrics">
+        <!-- Single File Analysis -->
+        <section class="card">
+            <h2>Analyze Your C++ Code</h2>
+            <p>Select a C++ source file to analyze its estimated energy score.</p>
 
-            <div class="card">
-                <h3>🔄 Loops</h3>
-                <div class="value" id="loops">--</div>
+            <form id="analyzeForm">
+                <div class="upload-area">
+                    <p><strong>Upload your C++ file</strong></p>
+                    <p class="muted">Supported extensions: .cpp, .cc, .cxx</p>
+
+                    <input
+                        type="file"
+                        id="sourceFile"
+                        name="file"
+                        accept=".cpp,.cc,.cxx"
+                        required
+                    />
+
+                    <button type="submit" id="analyzeButton">
+                        Analyze Code
+                    </button>
+                </div>
+            </form>
+
+            <div id="analyzeStatus" class="status" role="status"></div>
+        </section>
+
+        <!-- Analysis Results -->
+        <section id="analysisResults" class="card results">
+            <h2>Analysis Results</h2>
+
+            <div class="metrics">
+                <div class="metric">
+                    <h3>Energy Consumption Score</h3>
+                    <div class="value" id="energyScore">--</div>
+                </div>
+
+                <div class="metric">
+                    <h3>Estimated Energy Level</h3>
+                    <div class="value" id="energyLevel">--</div>
+                </div>
             </div>
 
-            <div class="card">
-                <h3>🔁 Nested Loops</h3>
-                <div class="value" id="nestedLoops">--</div>
+            <div style="margin-top: 25px;">
+                <h3 style="margin-bottom: 12px;">Analysis Report</h3>
+                <pre id="analysisReport">Your report will appear here.</pre>
             </div>
 
-            <div class="card">
-                <h3>🔀 Conditions</h3>
-                <div class="value" id="conditions">--</div>
+            <div style="margin-top: 25px;">
+                <h3 style="margin-bottom: 12px;">Source Code</h3>
+                <pre id="sourceCode">Your source code will appear here.</pre>
             </div>
 
-            <div class="card">
-                <h3>💻 I/O Operations</h3>
-                <div class="value" id="io">--</div>
+            <div style="margin-top: 25px;">
+                <h3 style="margin-bottom: 12px;">Line-by-Line Energy Heatmap</h3>
+                <div id="energyHeatmap">
+                    <p class="muted">
+                        Line-level results will appear here if available.
+                    </p>
+                </div>
             </div>
+        </section>
 
-        </div>
+        <!-- Before vs After Comparison -->
+        <section class="card" id="comparisonSection">
+            <h2>Before vs After Optimization</h2>
 
-        <div class="software">
-
-            <div class="card">
-                <h3>📊 Cyclomatic Complexity</h3>
-                <div class="value" id="complexity">--</div>
-            </div>
-
-            <div class="card">
-                <h3>📐 Halstead Volume</h3>
-                <div class="value" id="halstead">--</div>
-            </div>
-
-        </div>
-
-        <div
-            class="card"
-            style="margin-bottom:25px;"
-        >
-            <h3>♻️ Recursion</h3>
-            <div class="value" id="recursion">--</div>
-        </div>
-
-        <div class="energy-breakdown">
-
-            <h2>📊 Energy Breakdown</h2>
-
-            <div id="energyBreakdown"></div>
-
-        </div>
-
-        <div class="recommendations">
-
-            <h2>💡 Optimization Recommendations</h2>
-
-            <div id="recommendationList"></div>
-
-        </div>
-
-        <div class="code-section">
-
-            <h2>🔥 Line-by-Line Energy Heatmap</h2>
-
-            <p class="code-description">
-                Each source-code line is analyzed independently
-                based on detected energy-intensive operations.
+            <p>
+                Upload the original code and the optimized version to compare
+                their heuristic energy scores.
             </p>
 
-            <div
-                class="code-container"
-                id="codeContainer"
-            ></div>
+            <form id="compareForm">
+                <div class="comparison-grid" style="margin-top: 20px;">
 
-            <div class="legend">
+                    <div class="comparison-panel">
+                        <h3>1. Before Optimization</h3>
+                        <p class="muted">Select the original C++ file.</p>
 
-                <div class="legend-item">
-                    <div class="dot dot-low"></div>
-                    Low Energy
+                        <input
+                            type="file"
+                            id="baselineFile"
+                            name="baseline_file"
+                            accept=".cpp,.cc,.cxx"
+                            required
+                        />
+                    </div>
+
+                    <div class="comparison-panel">
+                        <h3>2. After Optimization</h3>
+                        <p class="muted">Select the optimized C++ file.</p>
+
+                        <input
+                            type="file"
+                            id="optimizedFile"
+                            name="optimized_file"
+                            accept=".cpp,.cc,.cxx"
+                            required
+                        />
+                    </div>
+
                 </div>
 
-                <div class="legend-item">
-                    <div class="dot dot-medium"></div>
-                    Medium Energy
+                <button
+                    type="submit"
+                    id="compareButton"
+                    style="margin-top: 20px;"
+                >
+                    Compare Scores
+                </button>
+            </form>
+
+            <div id="compareStatus" class="status" role="status"></div>
+
+            <div id="comparisonResults" class="comparison-result">
+                <div class="comparison-grid">
+
+                    <div class="comparison-panel">
+                        <h3>Before Optimization</h3>
+                        <div class="comparison-score" id="beforeScore">--</div>
+                        <p id="beforeLevel">Energy level: --</p>
+                    </div>
+
+                    <div class="comparison-panel">
+                        <h3>After Optimization</h3>
+                        <div class="comparison-score" id="afterScore">--</div>
+                        <p id="afterLevel">Energy level: --</p>
+                    </div>
+
                 </div>
 
-                <div class="legend-item">
-                    <div class="dot dot-high"></div>
-                    High Energy
+                <div class="metrics">
+                    <div class="metric">
+                        <h3>Score Reduction</h3>
+                        <div class="value" id="scoreReduction">--</div>
+                    </div>
                 </div>
 
+                <div class="comparison-note" id="comparisonNote">
+                    This comparison represents changes in the analyzer's
+                    heuristic score, not measured electricity savings.
+                </div>
             </div>
+        </section>
 
-        </div>
-
-    </div>
-
-    <div class="footer">
-        Green Compiler • The Silent Energy Crisis • Static Software Energy Analysis
-    </div>
-
-</div>
+    </main>
+</body>
 
 <script>
+    const analyzeForm = document.getElementById("analyzeForm");
+    const analyzeButton = document.getElementById("analyzeButton");
+    const analyzeStatus = document.getElementById("analyzeStatus");
 
-// ==========================================
-// ANALYZE CODE
-// ==========================================
+    const compareForm = document.getElementById("compareForm");
+    const compareButton = document.getElementById("compareButton");
+    const compareStatus = document.getElementById("compareStatus");
 
-async function analyzeCode()
-{
-    const fileInput =
-        document.getElementById("fileInput");
-
-    const button =
-        document.getElementById("analyzeBtn");
-
-    const loading =
-        document.getElementById("loading");
-
-    const errorBox =
-        document.getElementById("error");
-
-    const dashboard =
-        document.getElementById("dashboard");
-
-    if (!fileInput.files.length)
-    {
-        alert("Please select a C++ file first.");
-        return;
+    function showStatus(element, message, type) {
+        element.textContent = message;
+        element.className = "status " + type;
     }
 
-    const formData = new FormData();
-
-    formData.append(
-        "file",
-        fileInput.files[0]
-    );
-
-    button.disabled = true;
-    loading.style.display = "block";
-    errorBox.style.display = "none";
-    dashboard.style.display = "none";
-
-    try
-    {
-        const response =
-            await fetch(
-                "/analyze",
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!data.success)
-        {
-            throw new Error(
-                data.error ||
-                "Analysis failed."
-            );
+    function formatScore(value) {
+        if (value === null || value === undefined) {
+            return "N/A";
         }
 
-        displayReport(data.report);
-
-        displaySourceHeatmap(
-            data.source_code,
-            data.line_energy
-        );
-
-        dashboard.style.display = "block";
+        return Number(value).toLocaleString(undefined, {
+            maximumFractionDigits: 2
+        });
     }
-    catch (error)
-    {
-        errorBox.innerText =
-            "Analysis failed: " +
-            error.message;
 
-        errorBox.style.display = "block";
+    function displayLevel(level) {
+        return level || "Not available";
     }
-    finally
-    {
-        button.disabled = false;
-        loading.style.display = "none";
-    }
-}
 
+    // Single-file analysis
+    analyzeForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-// ==========================================
-// GET REPORT VALUE
-// ==========================================
+        const fileInput = document.getElementById("sourceFile");
 
-function getValue(report, label)
-{
-    const regex =
-        new RegExp(
-            label +
-            "\\s*:\\s*(.*)"
+        if (!fileInput.files.length) {
+            showStatus(analyzeStatus, "Please select a C++ file.", "error");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        analyzeButton.disabled = true;
+        analyzeButton.textContent = "Analyzing...";
+        showStatus(analyzeStatus, "Analyzing your code...", "success");
+
+        try {
+            const response = await fetch("/analyze", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Analysis failed.");
+            }
+
+            document.getElementById("analysisResults").style.display = "block";
+            document.getElementById("energyScore").textContent =
+                formatScore(data.energy_score);
+            document.getElementById("energyLevel").textContent =
+                displayLevel(data.energy_level);
+            document.getElementById("analysisReport").textContent =
+                data.report || "No report available.";
+            document.getElementById("sourceCode").textContent =
+                data.source_code || "";
+
+            renderHeatmap(data.line_energy || []);
+
+            showStatus(analyzeStatus, "Analysis completed successfully.", "success");
+            document.getElementById("analysisResults").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        } catch (error) {
+            showStatus(analyzeStatus, error.message, "error");
+        } finally {
+            analyzeButton.disabled = false;
+            analyzeButton.textContent = "Analyze Code";
+        }
+    });
+
+    // Render line-by-line heuristic scores
+    function renderHeatmap(lines) {
+        const container = document.getElementById("energyHeatmap");
+        container.replaceChildren();
+
+        if (!lines.length) {
+            const message = document.createElement("p");
+            message.className = "muted";
+            message.textContent =
+                "No line-by-line scores were found in the analyzer report.";
+            container.appendChild(message);
+            return;
+        }
+
+        const maxEnergy = Math.max(
+            ...lines.map(item => Number(item.energy) || 0),
+            1
         );
 
-    const match =
-        report.match(regex);
+        lines.forEach(item => {
+            const row = document.createElement("div");
+            row.className = "heatmap-row";
 
-    return match
-        ? match[1].trim()
-        : "--";
-}
+            const lineLabel = document.createElement("span");
+            lineLabel.textContent = "Line " + item.line;
 
+            const bar = document.createElement("div");
+            bar.className = "heatmap-bar";
 
-// ==========================================
-// DISPLAY REPORT
-// ==========================================
-
-function displayReport(report)
-{
-    const loops =
-        getValue(report, "Loops");
-
-    const nestedLoops =
-        getValue(report, "Nested Loops");
-
-    const conditions =
-        getValue(report, "Conditions");
-
-    const io =
-        getValue(
-            report,
-            "Input/Output Operations"
-        );
-
-    const recursion =
-        getValue(report, "Recursion");
-
-    const complexity =
-        getValue(
-            report,
-            "Cyclomatic Complexity"
-        );
-
-    const halstead =
-        getValue(
-            report,
-            "Halstead Volume"
-        );
-
-    const energy =
-        getValue(
-            report,
-            "Energy Consumption Score"
-        );
-
-    const level =
-        getValue(report, "Energy Level");
-
-    document.getElementById("loops").innerText =
-        loops;
-
-    document.getElementById("nestedLoops").innerText =
-        nestedLoops;
-
-    document.getElementById("conditions").innerText =
-        conditions;
-
-    document.getElementById("io").innerText =
-        io;
-
-    document.getElementById("recursion").innerText =
-        recursion;
-
-    document.getElementById("complexity").innerText =
-        complexity;
-
-    document.getElementById("halstead").innerText =
-        halstead;
-
-    document.getElementById("energyScore").innerText =
-        energy;
-
-    const levelElement =
-        document.getElementById("energyLevel");
-
-    levelElement.innerText = level;
-
-    levelElement.className =
-        "energy-level " +
-        level.toUpperCase();
-
-    createRecommendations(report);
-    createEnergyBreakdown(report);
-}
-
-
-// ==========================================
-// ENERGY BREAKDOWN
-// ==========================================
-
-function createEnergyBreakdown(report)
-{
-    const container =
-        document.getElementById(
-            "energyBreakdown"
-        );
-
-    container.innerHTML = "";
-
-    const loops =
-        Number(
-            getValue(report, "Loops")
-        ) || 0;
-
-    const nestedLoops =
-        Number(
-            getValue(
-                report,
-                "Nested Loops"
-            )
-        ) || 0;
-
-    const io =
-        Number(
-            getValue(
-                report,
-                "Input/Output Operations"
-            )
-        ) || 0;
-
-    const conditions =
-        Number(
-            getValue(
-                report,
-                "Conditions"
-            )
-        ) || 0;
-
-    const recursionText =
-        getValue(
-            report,
-            "Recursion"
-        );
-
-    const recursion =
-        recursionText === "YES"
-        ? 30
-        : 0;
-
-    const loopEnergy =
-        loops * 10;
-
-    const nestedEnergy =
-        nestedLoops * 25;
-
-    const ioEnergy =
-        io * 50;
-
-    const conditionEnergy =
-        conditions * 5;
-
-    const baseEnergy = 5;
-
-    const total =
-        loopEnergy +
-        nestedEnergy +
-        ioEnergy +
-        conditionEnergy +
-        recursion +
-        baseEnergy;
-
-    const factors = [
-        ["Loops", loopEnergy],
-        ["Nested Loops", nestedEnergy],
-        ["I/O Operations", ioEnergy],
-        ["Conditions", conditionEnergy],
-        ["Recursion", recursion],
-        ["Base Cost", baseEnergy]
-    ];
-
-    factors.forEach(
-        function(factor)
-        {
-            const name = factor[0];
-            const value = factor[1];
-
-            const row =
-                document.createElement("div");
-
-            row.className =
-                "breakdown-row";
-
-            const label =
-                document.createElement("div");
-
-            label.className =
-                "breakdown-label";
-
-            label.innerHTML =
-                "<strong>" +
-                name +
-                "</strong>" +
-                "<span>" +
-                value.toFixed(2) +
-                "</span>";
-
-            const bar =
-                document.createElement("div");
-
-            bar.className =
-                "breakdown-bar";
-
-            const fill =
-                document.createElement("div");
-
-            fill.className =
-                "breakdown-fill";
-
-            const percentage =
-                total > 0
-                ? (value / total) * 100
-                : 0;
-
+            const fill = document.createElement("div");
+            fill.className = "heatmap-fill";
             fill.style.width =
-                percentage + "%";
+                Math.max(0, Math.min(100, (Number(item.energy) / maxEnergy) * 100))
+                + "%";
 
             bar.appendChild(fill);
-            row.appendChild(label);
-            row.appendChild(bar);
+
+            const score = document.createElement("span");
+            score.textContent = formatScore(item.energy);
+
+            row.append(lineLabel, bar, score);
             container.appendChild(row);
+        });
+    }
+
+    // Compare original and optimized C++ files
+    compareForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const baselineInput = document.getElementById("baselineFile");
+        const optimizedInput = document.getElementById("optimizedFile");
+
+        if (!baselineInput.files.length || !optimizedInput.files.length) {
+            showStatus(
+                compareStatus,
+                "Please select both the original and optimized files.",
+                "error"
+            );
+            return;
         }
-    );
-}
 
+        const formData = new FormData();
+        formData.append("baseline_file", baselineInput.files[0]);
+        formData.append("optimized_file", optimizedInput.files[0]);
 
-// ==========================================
-// RECOMMENDATIONS
-// ==========================================
+        compareButton.disabled = true;
+        compareButton.textContent = "Comparing...";
+        document.getElementById("comparisonResults").style.display = "none";
 
-function createRecommendations(report)
-{
-    const list =
-        document.getElementById(
-            "recommendationList"
-        );
+        showStatus(compareStatus, "Comparing both versions...", "success");
 
-    list.innerHTML = "";
+        try {
+            const response = await fetch("/compare", {
+                method: "POST",
+                body: formData
+            });
 
-    const section =
-        report.split(
-            "RECOMMENDATION"
-        )[1];
+            const data = await response.json();
 
-    if (!section)
-    {
-        list.innerHTML =
-            "<div class='recommendation'>" +
-            "Code is relatively energy efficient." +
-            "</div>";
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Comparison failed.");
+            }
 
-        return;
-    }
+            document.getElementById("beforeScore").textContent =
+                formatScore(data.baseline.energy_score);
 
-    const lines =
-        section
-        .split("\n")
-        .filter(
-            line =>
-                line.trim().startsWith("-")
-        );
+            document.getElementById("beforeLevel").textContent =
+                "Energy level: " + displayLevel(data.baseline.energy_level);
 
-    if (lines.length === 0)
-    {
-        list.innerHTML =
-            "<div class='recommendation'>" +
-            "Code is relatively energy efficient." +
-            "</div>";
+            document.getElementById("afterScore").textContent =
+                formatScore(data.optimized.energy_score);
 
-        return;
-    }
+            document.getElementById("afterLevel").textContent =
+                "Energy level: " + displayLevel(data.optimized.energy_level);
 
-    lines.forEach(
-        line =>
-        {
-            const div =
-                document.createElement("div");
+            const reduction = data.score_reduction_percent;
 
-            div.className =
-                "recommendation";
+            document.getElementById("scoreReduction").textContent =
+                reduction === null || reduction === undefined
+                    ? "N/A"
+                    : formatScore(reduction) + "%";
 
-            div.innerText =
-                "✓ " +
-                line
-                .trim()
-                .substring(1)
-                .trim();
+            document.getElementById("comparisonNote").textContent =
+                (data.metric_note ||
+                "This is a heuristic score comparison, not a direct power measurement.")
+                + (reduction !== null && reduction !== undefined
+                    ? (reduction >= 0
+                        ? " The score decreased compared with the original."
+                        : " The score increased compared with the original.")
+                    : "");
 
-            list.appendChild(div);
+            document.getElementById("comparisonResults").style.display = "block";
+
+            showStatus(compareStatus, "Comparison completed successfully.", "success");
+
+            document.getElementById("comparisonResults").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        } catch (error) {
+            showStatus(compareStatus, error.message, "error");
+        } finally {
+            compareButton.disabled = false;
+            compareButton.textContent = "Compare Scores";
         }
-    );
-}
-
-
-// ==========================================
-// SOURCE CODE HEATMAP
-// ==========================================
-
-function displaySourceHeatmap(
-    sourceCode,
-    lineEnergy
-)
-{
-    const container =
-        document.getElementById(
-            "codeContainer"
-        );
-
-    container.innerHTML = "";
-
-    if (!sourceCode)
-    {
-        container.innerHTML =
-            "<p style='padding:20px'>" +
-            "Source code unavailable." +
-            "</p>";
-
-        return;
-    }
-
-    const energyMap = {};
-
-    if (Array.isArray(lineEnergy))
-    {
-        lineEnergy.forEach(
-            item =>
-            {
-                energyMap[item.line] =
-                    Number(item.energy) || 0;
-            }
-        );
-    }
-
-    const lines =
-        sourceCode.split("\n");
-
-    lines.forEach(
-        (line, index) =>
-        {
-            const lineNumber =
-                index + 1;
-
-            const energy =
-                energyMap[lineNumber] || 0;
-
-            const lineDiv =
-                document.createElement("div");
-
-            lineDiv.className =
-                "code-line";
-
-
-            // LINE NUMBER
-
-            const numberDiv =
-                document.createElement("div");
-
-            numberDiv.className =
-                "line-number";
-
-            numberDiv.innerText =
-                lineNumber;
-
-
-            // SOURCE CODE
-
-            const codeDiv =
-                document.createElement("div");
-
-            codeDiv.className =
-                "line-code";
-
-            codeDiv.innerText =
-                line || " ";
-
-
-            // ENERGY SCORE
-
-            const energyDiv =
-                document.createElement("div");
-
-            energyDiv.className =
-                "line-energy";
-
-            energyDiv.innerText =
-                energy.toFixed(2);
-
-
-            // REASON
-
-            const reasonDiv =
-                document.createElement("div");
-
-            reasonDiv.className =
-                "line-reason";
-
-            let reason =
-                "No major energy-intensive operation";
-
-
-            // I/O
-
-            if (
-                line.includes("cout") ||
-                line.includes("cin") ||
-                line.includes("printf") ||
-                line.includes("scanf")
-            )
-            {
-                reason =
-                    "🔴 I/O operation detected";
-            }
-
-
-            // LOOP
-
-            else if (
-                line.includes("for") ||
-                line.includes("while") ||
-                line.includes("do")
-            )
-            {
-                if (energy >= 20)
-                {
-                    reason =
-                        "🟡 Nested loop detected";
-                }
-                else
-                {
-                    reason =
-                        "🟢 Loop detected";
-                }
-            }
-
-
-            // CONDITION
-
-            else if (
-                line.includes("if") ||
-                line.includes("switch") ||
-                line.includes("case")
-            )
-            {
-                reason =
-                    "🟢 Condition detected";
-            }
-
-
-            // RECURSION
-
-            else if (
-                line.includes("factorial(") ||
-                line.includes("recursive(")
-            )
-            {
-                reason =
-                    "🔴 Recursive call detected";
-            }
-
-
-            // ENERGY LEVEL FOR OTHER LINES
-
-            else if (energy >= 50)
-            {
-                reason =
-                    "🔴 High Energy";
-            }
-
-            else if (energy >= 20)
-            {
-                reason =
-                    "🟡 Medium Energy";
-            }
-
-            else if (energy > 0)
-            {
-                reason =
-                    "🟢 Low Energy";
-            }
-
-
-            // IMPORTANT:
-            // DISPLAY THE REASON
-
-            reasonDiv.innerText =
-                reason;
-
-
-            // HEATMAP COLOR
-
-            if (energy === 0)
-            {
-                energyDiv.classList.add(
-                    "energy-none"
-                );
-            }
-            else if (energy < 20)
-            {
-                energyDiv.classList.add(
-                    "energy-low"
-                );
-            }
-            else if (energy < 50)
-            {
-                energyDiv.classList.add(
-                    "energy-medium"
-                );
-            }
-            else
-            {
-                energyDiv.classList.add(
-                    "energy-high"
-                );
-            }
-
-            energyDiv.title =
-                "Estimated line energy: " +
-                energy.toFixed(2);
-
-
-            // ADD ALL FOUR COLUMNS
-
-            lineDiv.appendChild(
-                numberDiv
-            );
-
-            lineDiv.appendChild(
-                codeDiv
-            );
-
-            lineDiv.appendChild(
-                energyDiv
-            );
-
-            lineDiv.appendChild(
-                reasonDiv
-            );
-
-            container.appendChild(
-                lineDiv
-            );
-        }
-    );
-}
-
+    });
 </script>
-
-</body>
 </html>
