@@ -12,7 +12,11 @@ app.config["MAX_CONTENT_LENGTH"] = 1 * 1024 * 1024
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ANALYZER_DIR = BASE_DIR / "analyzer"
-COMPILER = ANALYZER_DIR / "green_compiler.exe"
+COMPILER = ANALYZER_DIR / (
+    "green_compiler.exe"
+     if os.name == "nt"
+    else "green_compiler"
+)
 REPORT_FILE = ANALYZER_DIR / "analysis_result.txt"
 
 # Prevent simultaneous runs from overwriting the same report.
